@@ -1,5 +1,7 @@
 
-<img width="300" height="169" alt="logo_upaep" src="https://github.com/user-attachments/assets/27f31a27-aa4d-463f-8e32-66e95c2f831f" />
+
+<p align="center"><img width="422" height="119" alt="logo_upaep" src="https://github.com/user-attachments/assets/85e05ec0-1d92-4462-b9b2-40467e113e7b" />              <img height="119" alt="Logos" src="https://github.com/user-attachments/assets/1c5ad650-a0cc-42ae-a3df-779b8cdaad04" /></p>
+
 
 
 
@@ -142,17 +144,40 @@ En la carpeta practicas_posteriores/ se incluyen ejercicios opcionales:
 - Implementación de esquemas híbridos.
 
   ---
-  📚 Referencias
+## 📚 Referencias
 
-NIST FIPS 203 – ML-KEM
+1. National Institute of Standards and Technology (NIST).  
+   **FIPS 203 – Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM).**  
+   https://csrc.nist.gov/pubs/fips/203/final
 
-NIST FIPS 204 – ML-DSA
+2. National Institute of Standards and Technology (NIST).  
+   **FIPS 204 – Module-Lattice-Based Digital Signature Standard (ML-DSA).**  
+   https://csrc.nist.gov/pubs/fips/204/final
 
-Open Quantum Safe Project
+3. Open Quantum Safe (OQS) Project.  
+   **liboqs – Open-source quantum-resistant cryptographic library.**  
+   https://openquantumsafe.org/
+
+4. Open Quantum Safe GitHub Repository.  
+   https://github.com/open-quantum-safe/liboqs
+
+5. NIST Post-Quantum Cryptography Project.  
+   https://csrc.nist.gov/projects/post-quantum-cryptography
 ---
 👨‍🏫 Estudiante-Instructor
 
-Israel Jaudy Pérez Bermúdez
-Ingeniero Mecatrónico
-Maestría en Ciencias y Tecnologías de Seguridad – INAOE
-Principales lineas de trabajo en Identidad Digital y Criptografía Post-Cuántica
+**Israel Jaudy Pérez Bermúdez**  
+Ingeniero Mecatrónico  
+Maestría en Ciencias y Tecnologías de Seguridad – INAOE  
+Líneas de trabajo: Identidad Digital y Criptografía Post-Cuántica  
+israelj.perezb@inaoep.mx
+- ---
+
+🎓 Instructor-Coordinación Académica
+
+**Dr. Miguel Morales Sandoval**  
+Investigador en Ciencias Computacionales  
+Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE)  
+mmorales@inaoep.mx
+
+---
