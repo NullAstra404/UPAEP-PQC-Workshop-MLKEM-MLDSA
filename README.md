@@ -65,6 +65,28 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 ---
+
+### 🔎 Verificación de instalación
+
+Para comprobar que la biblioteca se instaló correctamente, ejecutar:
+
+```powershell
+python -c "import oqs; print('OQS instalado correctamente')"
+```
+---
+### 🔬 Verificación de algoritmos disponibles
+
+Para verificar que ML-KEM y ML-DSA están habilitados:
+
+```powershell
+python -c "import oqs; print('KEM disponibles:', oqs.get_enabled_KEM_mechanisms()); print('Firmas disponibles:', oqs.get_enabled_sig_mechanisms())"
+```
+Debe aparecer una lista que incluya variantes como:
+
+- ML-KEM-512 / 768 / 1024
+
+- ML-DSA-44 / 65 / 87
+---
 📂 Estructura del Proyecto
 ```powershell
 UPAEP-PQC-Workshop-MLKEM-MLDSA/
