@@ -1,0 +1,9 @@
+Taller de Criptografía Post-Cuántica
+Universidad UPAEP – 2026
+
+Este mensaje será utilizado para demostrar:
+
+1) Cifrado y descifrado utilizando ML-KEM.
+2) Firma digital y verificación utilizando ML-DSA.
+
+Autor: Israel Jaudy Pérez Bermúdez
