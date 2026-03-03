@@ -48,6 +48,28 @@ Al finalizar la sesión, el estudiante será capaz de:
 - Entorno virtual (recomendado)
 
 ---
+## 📥 Descarga del Proyecto
+
+Existen dos formas de obtener el repositorio:
+
+### Opción 1 – Clonar con Git (Recomendado)
+
+```powershell
+git clone https://github.com/NullAstra404/UPAEP-PQC-Workshop-MLKEM-MLDSA.git
+cd UPAEP-PQC-Workshop-MLKEM-MLDSA
+```
+###  Opción 2 – Descargar ZIP
+
+- Hacer clic en el botón verde Code.
+
+- Seleccionar Download ZIP.
+
+- Extraer el contenido.
+
+- Abrir PowerShell dentro de la carpeta del proyecto.
+
+
+---
 
 ## ⚙️ Instalación
 
@@ -86,6 +108,10 @@ Debe aparecer una lista que incluya variantes como:
 - ML-KEM-512 / 768 / 1024
 
 - ML-DSA-44 / 65 / 87
+
+
+ 📄 Para instrucciones detalladas de instalación ver:
+docs/INSTALACION_WINDOWS.md
 
 ---
 ## ▶️ Ejecución del Taller
@@ -190,7 +216,19 @@ Verificación: VÁLIDA
 Mensaje modificado...
 Verificación: INVÁLIDA
 ```
+---
 
+
+📂 Estructura del Proyecto
+```powershell
+UPAEP-PQC-Workshop-MLKEM-MLDSA/
+│
+├── message.txt
+├── 1_mlkem_cifrado.py
+├── 2_mldsa_firma.py
+├── requirements.txt
+└── practicas_posteriores/
+```
 ---
 🧠 Discusión Académica
 
@@ -205,7 +243,7 @@ Verificación: INVÁLIDA
 ---
 📂 Prácticas Posteriores (Nivel Avanzado)
 
-En la carpeta practicas_posteriores/ se incluyen ejercicios opcionales:
+En la carpeta practicas_posteriores se incluyen ejercicios opcionales:
 
 - Comparación entre ML-KEM-512, 768 y 1024.
 
