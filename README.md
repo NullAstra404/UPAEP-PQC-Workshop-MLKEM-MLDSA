@@ -60,7 +60,7 @@ python -m pip install --upgrade pip
 ```
 ---
 
-2️⃣ Instalar dependencias
+### 2️⃣ Instalar dependencias
 ```powershell
 pip install -r requirements.txt
 ```
@@ -86,6 +86,56 @@ Debe aparecer una lista que incluya variantes como:
 - ML-KEM-512 / 768 / 1024
 
 - ML-DSA-44 / 65 / 87
+
+---
+## ▶️ Ejecución del Taller
+
+Una vez instalada la biblioteca y verificado el entorno, ejecutar los siguientes scripts en el siguiente orden:
+
+### 🔐 1️⃣ ML-KEM — Cifrado y Descifrado
+
+```powershell
+python 1_mlkem_cifrado.py
+```
+Este script:
+
+-Genera un secreto compartido mediante ML-KEM.
+
+-Deriva una clave simétrica.
+
+-Cifra el archivo message.txt.
+
+-Descifra el mensaje y verifica que coincida.
+
+-Muestra tamaños de claves y tiempos de ejecución.
+
+---
+
+### ✍️ 2️⃣ ML-DSA — Firma Digital
+```powershell
+python 2_mldsa_firma.py
+```
+Este script:
+
+-Genera claves ML-DSA.
+
+-Firma digitalmente el archivo message.txt.
+
+-Verifica la validez de la firma.
+
+-Permite modificar el archivo para observar cómo la verificación falla.
+
+---
+## 🧪 Actividad Guiada
+
+1. Ejecutar el script de firma.
+
+2. Modificar una línea en message.txt.
+
+3. Ejecutar nuevamente el script.
+
+4. Observar que la verificación ahora es INVÁLIDA.
+   
 ---
 📂 Estructura del Proyecto
 ```powershell
