@@ -298,5 +298,4 @@ Ingeniero Mecatrónico
 Maestría en Ciencias y Tecnologías de Seguridad – INAOE  
 Líneas de trabajo: Identidad Digital y Criptografía Post-Cuántica  
 israelj.perezb@inaoep.mx
----
-**
+
