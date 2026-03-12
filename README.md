@@ -293,10 +293,10 @@ alejandro.ojedax@inaoe.mx
 
 ---
 👨‍🏫 Estudiante-Instructor
-
-**Israel Jaudy Pérez Bermúdez**  
+****Israel Jaudy Pérez Bermúdez**  
 Ingeniero Mecatrónico  
 Maestría en Ciencias y Tecnologías de Seguridad – INAOE  
 Líneas de trabajo: Identidad Digital y Criptografía Post-Cuántica  
 israelj.perezb@inaoep.mx
 ---
+**
