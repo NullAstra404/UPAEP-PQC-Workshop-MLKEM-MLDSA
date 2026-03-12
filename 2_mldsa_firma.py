@@ -1,4 +1,5 @@
 import os
+import sys
 import time
 from dataclasses import dataclass
 
@@ -10,9 +11,9 @@ import oqs
 SIG_ALG = "ML-DSA-65"   # Cambiar a: ML-DSA-44 / ML-DSA-65 / ML-DSA-87
 INPUT_FILE = "message.txt"
 
-# Archivos de salida (evidencias)
+# Archivos de salida / persistencia
 PUBLIC_KEY_FILE = "mldsa_pk.bin"
-SECRET_KEY_FILE = "mldsa_sk.bin"     # (solo para demo local; NO recomendado en producción)
+SECRET_KEY_FILE = "mldsa_sk.bin"     # solo para demo local; NO recomendado en producción
 SIGNATURE_FILE = "message.sig.bin"
 
 # =========================
@@ -33,28 +34,39 @@ def print_header(title: str) -> None:
 def ns_to_ms(ns: int) -> float:
     return ns / 1_000_000.0
 
-# =========================
-# Flujo principal
-# =========================
-def main() -> None:
-    if not os.path.exists(INPUT_FILE):
-        raise FileNotFoundError(
-            f"No se encontró '{INPUT_FILE}'. Crea el archivo en el repo antes de ejecutar."
-        )
+def read_bytes(path: str) -> bytes:
+    with open(path, "rb") as f:
+        return f.read()
 
-    print_header("Parte 2 — ML-DSA: firma digital + verificación")
+def write_bytes(path: str, data: bytes) -> None:
+    with open(path, "wb") as f:
+        f.write(data)
 
-    # 1) Leer mensaje
-    with open(INPUT_FILE, "rb") as f:
-        message = f.read()
+def ensure_exists(path: str, description: str) -> None:
+    if not os.path.exists(path):
+        raise FileNotFoundError(f"No se encontró {description}: '{path}'")
+
+def usage() -> None:
+    print("Uso:")
+    print("  python 2_mldsa_firma.py sign")
+    print("  python 2_mldsa_firma.py verify")
+
+# =========================
+# Modo: sign
+# =========================
+def sign_mode() -> None:
+    ensure_exists(INPUT_FILE, "el archivo de entrada")
+
+    print_header("ML-DSA — Modo sign (generación de llaves y firma)")
+
+    message = read_bytes(INPUT_FILE)
 
     print(f"Archivo de entrada: {INPUT_FILE}")
     print(f"Tamaño del mensaje (bytes): {len(message)}")
     print(f"Algoritmo de firma seleccionado: {SIG_ALG}")
 
-    # 2) Keygen + firma + verificación
     with oqs.Signature(SIG_ALG) as signer:
-        # Keygen
+        # KeyGen
         t0 = time.perf_counter_ns()
         public_key = signer.generate_keypair()
         secret_key = signer.export_secret_key()
@@ -65,23 +77,11 @@ def main() -> None:
         signature = signer.sign(message)
         t3 = time.perf_counter_ns()
 
-    # Verificación (con una instancia nueva usando public_key)
-    with oqs.Signature(SIG_ALG) as verifier:
-        t4 = time.perf_counter_ns()
-        valid = verifier.verify(message, signature, public_key)
-        t5 = time.perf_counter_ns()
+    # Guardar materiales
+    write_bytes(PUBLIC_KEY_FILE, public_key)
+    write_bytes(SECRET_KEY_FILE, secret_key)
+    write_bytes(SIGNATURE_FILE, signature)
 
-    # 3) Guardar evidencias (demo)
-    with open(PUBLIC_KEY_FILE, "wb") as f:
-        f.write(public_key)
-
-    with open(SECRET_KEY_FILE, "wb") as f:
-        f.write(secret_key)
-
-    with open(SIGNATURE_FILE, "wb") as f:
-        f.write(signature)
-
-    # 4) Tamaños
     sizes = Sizes(
         public_key=len(public_key),
         secret_key=len(secret_key),
@@ -89,10 +89,8 @@ def main() -> None:
         message=len(message),
     )
 
-    # 5) Resultados
     print_header("Resultados")
-    print("Firma generada.")
-    print("Verificación:", "VÁLIDA ✅" if valid else "INVÁLIDA ❌")
+    print("Firma generada correctamente y guardada en disco.")
 
     print("\nTamaños (bytes)")
     print(f" - Public Key:  {sizes.public_key}")
@@ -103,19 +101,76 @@ def main() -> None:
     print("\nTiempos (ms)")
     print(f" - KeyGen:      {ns_to_ms(t1 - t0):.3f}")
     print(f" - Firma:       {ns_to_ms(t3 - t2):.3f}")
-    print(f" - Verificación:{ns_to_ms(t5 - t4):.3f}")
 
     print("\nArchivos generados")
     print(f" - {PUBLIC_KEY_FILE}   (llave pública)")
     print(f" - {SECRET_KEY_FILE}   (llave privada - solo demo local)")
     print(f" - {SIGNATURE_FILE}    (firma del mensaje)")
 
-    # 6) Actividad guiada: modificar mensaje y verificar de nuevo
-    print_header("Actividad (modificación del mensaje)")
-    print("1) Abre 'message.txt' y cambia UNA línea (por ejemplo, el nombre del autor).")
-    print("2) Guarda el archivo.")
-    print("3) Vuelve a ejecutar este script.")
-    print("   La verificación debe salir como INVÁLIDA, porque el mensaje cambió.")
+    print_header("Siguiente")
+    print("Ahora ejecuta:")
+    print("  python 2_mldsa_firma.py verify")
+    print("Luego modifica message.txt y vuelve a ejecutar verify.")
+    print("Finalmente restaura message.txt y vuelve a ejecutar verify.")
+
+# =========================
+# Modo: verify
+# =========================
+def verify_mode() -> None:
+    ensure_exists(INPUT_FILE, "el archivo de entrada")
+    ensure_exists(PUBLIC_KEY_FILE, "la llave pública")
+    ensure_exists(SIGNATURE_FILE, "la firma guardada")
+
+    print_header("ML-DSA — Modo verify (verificación de firma existente)")
+
+    message = read_bytes(INPUT_FILE)
+    public_key = read_bytes(PUBLIC_KEY_FILE)
+    signature = read_bytes(SIGNATURE_FILE)
+
+    print(f"Archivo de entrada: {INPUT_FILE}")
+    print(f"Tamaño del mensaje (bytes): {len(message)}")
+    print(f"Algoritmo de firma seleccionado: {SIG_ALG}")
+
+    with oqs.Signature(SIG_ALG) as verifier:
+        t0 = time.perf_counter_ns()
+        valid = verifier.verify(message, signature, public_key)
+        t1 = time.perf_counter_ns()
+
+    print_header("Resultado de verificación")
+    print("Verificación:", "VÁLIDA ✅" if valid else "INVÁLIDA ❌")
+
+    print("\nTamaños (bytes)")
+    print(f" - Public Key:  {len(public_key)}")
+    print(f" - Firma:       {len(signature)}")
+    print(f" - Mensaje:     {len(message)}")
+
+    print("\nTiempo (ms)")
+    print(f" - Verificación: {ns_to_ms(t1 - t0):.3f}")
+
+    print("\nInterpretación")
+    if valid:
+        print("La firma corresponde exactamente al contenido actual de message.txt.")
+    else:
+        print("La firma NO corresponde al contenido actual de message.txt.")
+        print("Esto indica que el mensaje fue modificado o que la firma/llave pública no corresponden.")
+
+# =========================
+# Flujo principal
+# =========================
+def main() -> None:
+    if len(sys.argv) != 2:
+        usage()
+        sys.exit(1)
+
+    mode = sys.argv[1].strip().lower()
+
+    if mode == "sign":
+        sign_mode()
+    elif mode == "verify":
+        verify_mode()
+    else:
+        usage()
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
