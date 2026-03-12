@@ -273,15 +273,7 @@ En la carpeta practicas_posteriores se incluyen ejercicios opcionales:
 
 5. NIST Post-Quantum Cryptography Project.  
    https://csrc.nist.gov/projects/post-quantum-cryptography
----
-👨‍🏫 Estudiante-Instructor
 
-**Israel Jaudy Pérez Bermúdez**  
-Ingeniero Mecatrónico  
-Maestría en Ciencias y Tecnologías de Seguridad – INAOE  
-Líneas de trabajo: Identidad Digital y Criptografía Post-Cuántica  
-israelj.perezb@inaoep.mx
-- ---
 
 🎓 Instructor-Coordinación Académica
 
@@ -290,4 +282,21 @@ Investigador en Ciencias Computacionales
 Instituto Nacional de Astrofísica, Óptica y Electrónica (INAOE)  
 mmorales@inaoep.mx
 
+---
+👨‍🏫 Estudiante-Instructor
+**Alejandro Ojeda Xiqui**  
+Licenciado en Física 
+Maestría en Ciencias Computacionales – INAOE  
+Líneas de trabajo: Privacy-Preserving Machine Learning y Criptografía Post-Cuántica  
+alejandro.ojedax@inaoe.mx
+
+
+---
+👨‍🏫 Estudiante-Instructor
+
+**Israel Jaudy Pérez Bermúdez**  
+Ingeniero Mecatrónico  
+Maestría en Ciencias y Tecnologías de Seguridad – INAOE  
+Líneas de trabajo: Identidad Digital y Criptografía Post-Cuántica  
+israelj.perezb@inaoep.mx
 ---
